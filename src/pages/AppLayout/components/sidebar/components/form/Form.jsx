@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./Form.module.css";
 import Button from "../../../../../common-components/button/Button";
@@ -34,8 +35,6 @@ function Form() {
   const [notes, setNotes] = useState("");
   const [emoji, setEmoji] = useState("");
   const [geocodingError, setGeocodingError] = useState("");
-
-
 
   useEffect(
     function () {
@@ -96,7 +95,6 @@ function Form() {
 
   if (geocodingError) return <Message message={geocodingError} />;
 
-
   return (
     <form
       className={`${styles.form} ${isLoading ? styles.loading : ""}`}
@@ -139,6 +137,5 @@ function Form() {
     </form>
   );
 }
-
 
 export default Form;
