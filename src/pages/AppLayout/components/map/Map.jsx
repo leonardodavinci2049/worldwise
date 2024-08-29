@@ -1,4 +1,11 @@
-import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
 import styles from "./Map.module.css";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -10,7 +17,7 @@ import { useGeolocation } from "../../../../hooks/useGeolocation";
 const Map = () => {
   const { cities } = useCities();
   const [mapPosition, setMapPosition] = useState([40, 0]);
-  
+
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
@@ -34,7 +41,6 @@ const Map = () => {
     [geolocationPosition]
   );
 
-
   return (
     <div className={styles.mapContainer}>
       {!geolocationPosition && (
@@ -45,7 +51,7 @@ const Map = () => {
 
       <MapContainer
         center={mapLat ? [mapLat, mapLng] : mapPosition}
-        zoom={7}
+        zoom={5}
         scrollWheelZoom={true}
         className={styles.map}
       >
@@ -83,7 +89,5 @@ function DetectClick() {
     click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
 }
-
-
 
 export default Map;
