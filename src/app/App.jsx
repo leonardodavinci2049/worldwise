@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { CitiesProvider } from "../contexts/CitiesContext";
@@ -21,28 +21,7 @@ const PageNotFound = lazy(() => import("../pages/PageNotFound/PageNotFound"));
 // dist/assets/index-59fcab9b.css   30.56 kB │ gzip:   5.14 kB
 // dist/assets/index-f7c12d89.js   572.44 kB │ gzip: 151.29 kB
 
-const BASE_URL = "http://localhost:9000";
-
 function App() {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchCities() {
-      try {
-        setIsLoading(true);
-        const response = await fetch(`${BASE_URL}/cities`);
-        const data = await response.json();
-        setCities(data);
-      } catch  {
-        alert("An error occurred. Please try again later.");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchCities();
-  }, []);
-
   return (
     <AuthProvider>
       <CitiesProvider>
@@ -62,17 +41,9 @@ function App() {
                 }
               >
                 <Route index element={<Navigate replace to="cities" />} />
-                <Route
-                  path="cities"
-                  element={<Citylist cities={cities} isLoading={isLoading} />}
-                />
+                <Route path="cities" element={<Citylist />} />
                 <Route path="cities/:id" element={<City />} />
-                <Route
-                  path="countries"
-                  element={
-                    <CountryList cities={cities} isLoading={isLoading} />
-                  }
-                />
+                <Route path="countries" element={<CountryList />} />
                 <Route path="form" element={<Form />} />
               </Route>
               <Route path="*" element={<PageNotFound />} />

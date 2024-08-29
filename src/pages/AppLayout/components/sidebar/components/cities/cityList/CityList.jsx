@@ -1,14 +1,14 @@
-import Message from "../../../../../../common-components/message/Message";
-import Spinner from "../../../../../../common-components/spinner/Spinner";
-import CityItem from "../cityitem/CityItem";
-
 import styles from "./CityList.module.css";
 
-//import { useCities } from "../contexts/CitiesContext";
-import PropTypes from "prop-types";
+import Message from "../../../../../../common-components/message/Message";
+import Spinner from "../../../../../../common-components/spinner/Spinner";
+import useCities from "../../../../../../../contexts/UseCities";
+import CityItem from "../cityItem/CityItem";
 
-function CityList({ cities, isLoading }) {
-  // const { cities, isLoading } = useCities();
+//import { useCities } from "../contexts/CitiesContext";
+
+function CityList() {
+  const { cities, isLoading } = useCities();
 
   if (isLoading) return <Spinner />;
 
@@ -25,10 +25,5 @@ function CityList({ cities, isLoading }) {
     </ul>
   );
 }
-
-CityList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-};
 
 export default CityList;
