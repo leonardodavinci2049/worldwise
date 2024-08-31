@@ -10,6 +10,7 @@ import Citylist from "../pages/AppLayout/components/sidebar/components/cities/ci
 import City from "../pages/AppLayout/components/sidebar/components/cities/city/City";
 import CountryList from "../pages/AppLayout/components/sidebar/components/countries/countryList/CountryList";
 import Form from "../pages/AppLayout/components/sidebar/components/form/Form";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const Homepage = lazy(() => import("../pages/Homepage/Homepage"));
 const Product = lazy(() => import("../pages/Product/Product"));
@@ -35,9 +36,9 @@ function App() {
               <Route
                 path="app"
                 element={
-                  // <ProtectedRoute>
-                  <AppLayout />
-                  // </ProtectedRoute>
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
                 }
               >
                 <Route index element={<Navigate replace to="cities" />} />
